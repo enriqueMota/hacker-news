@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Header from "./components/Header";
+import "./styles/index.css";
 
-function App() {
+const App: React.FC = () => {
+  const [showAll, setShowAll] = useState(true);
+
+  const toggleView = () => {
+    setShowAll(!showAll);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="body">
+      <Header />
+      <div className="Toggle">
+        <div
+          onClick={toggleView}
+          style={{
+            color: showAll ? "var(--azure)" : "var(--gray)",
+            border: showAll
+              ? "1px solid var(--azure)"
+              : "1px solid var(--gray)",
+          }}
+          className="Rectangle"
         >
-          Learn React
-        </a>
-      </header>
+          <span className="All Text-Style-2">All</span>
+        </div>
+        <div
+          onClick={toggleView}
+          style={{
+            color: !showAll ? "var(--azure)" : "var(--gray)",
+            border: !showAll
+              ? "1px solid var(--azure)"
+              : "1px solid var(--gray)",
+          }}
+          className="Rectangle"
+        >
+          <span className="My-faves">My faves</span>
+        </div>
+      </div>
+      {showAll && <>all</>}
+      {!showAll && <>my faves</>}
     </div>
   );
-}
+};
 
 export default App;
