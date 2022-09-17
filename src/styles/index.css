@@ -10,8 +10,8 @@ body {
 
 .container {
     margin: 0 auto;
-    width: 70rem;
-    border: 1px solid red;
+    width: 75rem;
+    /* border: 1px solid red; */
     margin-top: 1.5rem;
 }
 
@@ -172,11 +172,20 @@ img.HACKER-NEWS {
     gap: .5rem;
 }
 
+.Post-Container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem;
+    margin: 2rem 0;;
+}
+
 .Post {
     width: 34.375rem;
     height: 5.625rem;
     padding: 0 0 0 1.625rem;
     opacity: 0.8;
+    cursor: pointer;
     display: flex;
     justify-content: space-between;
     border-radius: 6px;
@@ -212,6 +221,15 @@ img.iconmonstr-favorite-2 {
     cursor: pointer;
     object-fit: contain;
 }
+img.iconmonstr-favorite-3 {
+    width: 1.5rem;
+    height: 1.375rem;
+    margin: auto 0 auto -4rem;
+    z-index: 99;
+    position: relative;
+    cursor: pointer;
+    object-fit: contain;
+}
 
 
 .Post-Details {
@@ -233,7 +251,7 @@ img.iconmonstr-time-2 {
 }
 
 .Post-Time-Detail {
-    width: 6.313rem;
+    width: fit-content;
     height: 0.813rem;
     margin: 1rem 20.688rem 0.438rem 0;
     font-family: Roboto;

@@ -11,6 +11,7 @@ interface DropdownProps {
 
 const Dropdown: React.FunctionComponent<DropdownProps> = ({ setParams }) => {
   const [open, setOpen] = useState(false);
+  const [filter, setFilter] = useState('reactjs');
 
   const handleOpen = () => {
     setOpen(!open);
@@ -23,6 +24,8 @@ const Dropdown: React.FunctionComponent<DropdownProps> = ({ setParams }) => {
         query: technology,
       };
     });
+    window?.localStorage.setItem("selected_filter", technology);
+    setFilter(technology);
     setOpen(!open);
   };
 
@@ -37,7 +40,7 @@ const Dropdown: React.FunctionComponent<DropdownProps> = ({ setParams }) => {
       className="dropdown"
     >
       <button className="dropbtn">
-        <span>Select your news</span>
+        <span>{filter}</span>
         <img
           height={10}
           src="/img/arrow-down-sign-to-navigate.png"

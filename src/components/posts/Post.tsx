@@ -1,22 +1,64 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Hit } from "../../models";
+import { timeAgo } from "../../utils/time";
 
-interface PostProps {}
+interface PostProps {
+  hit: Hit;
+}
 
-const Post: React.FunctionComponent<PostProps> = () => {
+const Post: React.FunctionComponent<PostProps> = ({ hit }) => {
+  const [likedPosts, setLikedPosts] = useState<Hit[]>();
+
+  useEffect(() => {
+    const likedPosts: Hit[] = JSON.parse(
+      window.localStorage.getItem("liked_posts") as string
+    );
+    setLikedPosts(likedPosts);
+  }, []);
+
+  const handleClick = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+
+    if (target?.classList?.contains("iconmonstr-favorite-2")) {
+      const localPosts = JSON.parse(window.localStorage.getItem("liked_posts") as string);
+      const withTargetPost = [...localPosts, hit];
+      setLikedPosts(withTargetPost);
+      window.localStorage.setItem("liked_posts", JSON.stringify(withTargetPost));
+      return;
+    }
+
+    if (target?.classList?.contains("iconmonstr-favorite-3")) {
+      const localPosts = JSON.parse(window.localStorage.getItem("liked_posts") as string);
+      const withoutTargetPost = localPosts?.filter(
+        (post: Hit) => post?.story_id !== hit?.story_id
+      );
+      setLikedPosts(withoutTargetPost);
+      window.localStorage.setItem("liked_posts", JSON.stringify(withoutTargetPost));
+      return;
+    }
+
+    window.open(hit?.story_url as string, "_blank");
+  };
+
+  const isPostLiked = () =>
+    likedPosts?.find((post) => post?.story_id === hit?.story_id);
+
   return (
-    <div className="Post">
+    <div onClick={handleClick} className="Post">
       <div className="Post-Details">
         <div className="Post-Time">
           <img src="img/iconmonstr-time-2.svg" className="iconmonstr-time-2" />
-          <span className="Post-Time-Detail">1 hour ago by author</span>
+          <span className="Post-Time-Detail">
+            {timeAgo(hit?.created_at.toString())} by {hit?.author}
+          </span>
         </div>
-        <span className="Post-Title">From chaos to free will</span>
+        <span className="Post-Title">{hit?.story_title}</span>
       </div>
       <div className="Like-Duo">
         <div className="Like-Box" />
         <img
-          className="iconmonstr-favorite-2"
-          src="img/iconmonstr-favorite-2.svg"
+          className={`iconmonstr-favorite-${isPostLiked() ? "3" : "2"}`}
+          src={`img/iconmonstr-favorite-${isPostLiked() ? "3" : "2"}.svg`}
           alt="like button"
         />
       </div>

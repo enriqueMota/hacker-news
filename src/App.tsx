@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AllPosts from "./components/posts/AllPosts";
 import Header from "./components/layout/Header";
 import "./styles/index.css";
@@ -22,6 +22,18 @@ const queryClient = new QueryClient({
 
 const App: React.FC = () => {
   const [showAll, setShowAll] = useState(true);
+
+  useEffect(() => {
+    if (
+      window?.localStorage.hasOwnProperty("liked_posts") &&
+      window?.localStorage.hasOwnProperty("selected_filter")
+    ) {
+      return;
+    }
+
+    window.localStorage.setItem("liked_posts", JSON.stringify([]));
+    window.localStorage.setItem("selected_filter", "reactjs");
+  }, []);
 
   /**
    * Toggles between all posts and the faves
