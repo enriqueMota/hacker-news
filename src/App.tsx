@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import AllPosts from "./components/posts/AllPosts";
-import Header from "./components/Header";
+import Header from "./components/layout/Header";
 import "./styles/index.css";
 import { QueryClient, QueryClientProvider } from "react-query";
+import PostToggle from "./components/layout/PostToggle";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,32 +34,7 @@ const App: React.FC = () => {
     <QueryClientProvider client={queryClient}>
       <div className="body">
         <Header />
-        <div className="Toggle">
-          <div
-            onClick={toggleView}
-            style={{
-              color: showAll ? "var(--azure)" : "var(--gray)",
-              border: showAll
-                ? "1px solid var(--azure)"
-                : "1px solid var(--gray)",
-            }}
-            className="Rectangle"
-          >
-            <span className="All Text-Style-2">All</span>
-          </div>
-          <div
-            onClick={toggleView}
-            style={{
-              color: !showAll ? "var(--azure)" : "var(--gray)",
-              border: !showAll
-                ? "1px solid var(--azure)"
-                : "1px solid var(--gray)",
-            }}
-            className="Rectangle"
-          >
-            <span className="My-faves">My faves</span>
-          </div>
-        </div>
+        <PostToggle {...{ showAll, toggleView }} />
         <div className="container">
           {showAll && <AllPosts />}
           {!showAll && <>my faves</>}

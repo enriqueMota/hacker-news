@@ -1,0 +1,68 @@
+import React, { useState } from "react";
+
+interface DropdownProps {
+  setParams: React.Dispatch<
+    React.SetStateAction<{
+      page: number;
+      query: string;
+    }>
+  >;
+}
+
+const Dropdown: React.FunctionComponent<DropdownProps> = ({ setParams }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(!open);
+  };
+
+  const handleClick = (technology: string) => {
+    setParams((prevParams) => {
+      return {
+        ...prevParams,
+        query: technology,
+      };
+    });
+    setOpen(!open);
+  };
+
+  return (
+    <div
+      onBlur={() => {
+        setTimeout(() => {
+          handleOpen();
+        }, 200);
+      }}
+      onClick={handleOpen}
+      className="dropdown"
+    >
+      <button className="dropbtn">
+        <span>Select your news</span>
+        <img
+          height={10}
+          src="/img/arrow-down-sign-to-navigate.png"
+          alt="down-arrow"
+        />
+      </button>
+      <div
+        style={{ display: open ? "block" : "none" }}
+        className="dropdown-content"
+      >
+        <div onClick={() => handleClick("angular")} className="dropdown-option">
+          <img src="/img/image-138.png" alt="angular-logo" />
+          <span>Angular</span>
+        </div>
+        <div onClick={() => handleClick("reactjs")} className="dropdown-option">
+          <img src="/img/image-140.png" alt="reactjs-logo" />
+          <span>Reactjs</span>
+        </div>
+        <div onClick={() => handleClick("vuejs")} className="dropdown-option">
+          <img src="/img/image-141.png" alt="vuejs-logo" />
+          <span>Vuejs</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Dropdown;
