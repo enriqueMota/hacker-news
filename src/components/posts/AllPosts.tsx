@@ -18,13 +18,11 @@ const AllPosts: React.FunctionComponent<AllPostsProps> = () => {
   const notNullable = ["author", "story_title", "story_url", "created_at"];
 
   useEffect(() => {
-
     // creating an empty array that will contain all the posts that are not null;
     const newHits: Hit[] = [];
 
     // if there are no posts, then this scoped code would be ignored
     if (posts?.length) {
-
       data?.hits.forEach((hit) => {
         let hasNull = false;
         for (let i = 0; i < notNullable.length; i++) {
@@ -42,8 +40,8 @@ const AllPosts: React.FunctionComponent<AllPostsProps> = () => {
 
       // if the query is for a new technology instead of infinite scrolling,
       // then we discard the old posts
-      if(!params?.page){
-        setPosts(newHits)
+      if (!params?.page) {
+        setPosts(newHits);
         return;
       }
       setPosts([...posts, ...(newHits as Hit[])]);
@@ -57,7 +55,6 @@ const AllPosts: React.FunctionComponent<AllPostsProps> = () => {
 
       // Looping through all the not nullable keys
       for (let i = 0; i < notNullable.length; i++) {
-
         const key = notNullable[i];
 
         // Checking if the current key has a null or undefined value
@@ -80,8 +77,8 @@ const AllPosts: React.FunctionComponent<AllPostsProps> = () => {
 
   return (
     <div>
-      <Dropdown {...{ setParams }} />
       <div className="Post-Container">
+        <Dropdown {...{ setParams }} />
         {posts?.map((hit, i) => (
           <React.Fragment key={`${hit?.story_id}-${i}`}>
             <Post {...{ hit }} />
