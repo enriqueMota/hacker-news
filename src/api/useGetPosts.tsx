@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { getPosts } from ".";
 import { QueryParams } from "../models";
@@ -14,6 +14,7 @@ const useGetPosts = (params: QueryParams) => {
 
   useEffect(() => {
     query.refetch();
+    // eslint-disable-next-line
   }, [params]);
 
   return query;

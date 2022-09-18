@@ -73,6 +73,7 @@ const AllPosts: React.FunctionComponent<AllPostsProps> = () => {
 
     // and finally onto the state, the same process but slightly different happens if there are already a list of posts
     setPosts(newHits);
+    // eslint-disable-next-line
   }, [data?.hits]);
 
   return (

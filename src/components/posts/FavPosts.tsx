@@ -12,6 +12,7 @@ const FavPosts: React.FunctionComponent<FavPostsProps> = () => {
       window.localStorage.getItem("liked_posts") as string
     );
     setFavPosts(posts as Hit[]);
+    // eslint-disable-next-line
   }, [window.localStorage]);
 
   return (

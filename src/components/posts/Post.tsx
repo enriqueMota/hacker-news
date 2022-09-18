@@ -62,7 +62,7 @@ const Post: React.FunctionComponent<PostProps> = ({ hit }) => {
     <div onClick={handleClick} className="Post">
       <div className="Post-Details">
         <div className="Post-Time">
-          <img src="img/iconmonstr-time-2.svg" className="iconmonstr-time-2" />
+          <img alt='time-icon' src="img/iconmonstr-time-2.svg" className="iconmonstr-time-2" />
           <span className="Post-Time-Detail">
             {timeAgo(hit?.created_at.toString())} by {hit?.author}
           </span>
