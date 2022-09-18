@@ -40,6 +40,12 @@ const AllPosts: React.FunctionComponent<AllPostsProps> = () => {
         if (!hasNull) newHits.push(hit);
       });
 
+      // if the query is for a new technology instead of infinite scrolling,
+      // then we discard the old posts
+      if(!params?.page){
+        setPosts(newHits)
+        return;
+      }
       setPosts([...posts, ...(newHits as Hit[])]);
       return;
     }

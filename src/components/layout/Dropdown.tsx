@@ -16,7 +16,7 @@ interface DropdownProps {
  */
 const Dropdown: React.FunctionComponent<DropdownProps> = ({ setParams }) => {
   const [open, setOpen] = useState(false);
-  const [filter, setFilter] = useState('reactjs');
+  const [filter, setFilter] = useState("reactjs");
 
   const handleOpen = () => {
     setOpen(!open);
@@ -27,11 +27,9 @@ const Dropdown: React.FunctionComponent<DropdownProps> = ({ setParams }) => {
    * @param technology technology to be queried on the API
    */
   const handleClick = (technology: string) => {
-    setParams((prevParams) => {
-      return {
-        ...prevParams,
-        query: technology,
-      };
+    setParams({
+      page: 0,
+      query: technology,
     });
     window?.localStorage.setItem("selected_filter", technology);
     setFilter(technology);

@@ -16,8 +16,8 @@ const FavPosts: React.FunctionComponent<FavPostsProps> = () => {
 
   return (
     <>
-      {favPosts?.map((hit: Hit) => (
-        <div className="Post-Container">
+      {favPosts?.map((hit: Hit, i) => (
+        <div key={`${hit?.story_id}-${i}`} className="Post-Container">
           <Post {...{ hit }} />
         </div>
       ))}
