@@ -25,7 +25,7 @@ const PostToggle: React.FunctionComponent<PostToggleProps> = ({
         }}
         className="Rectangle"
       >
-        <span className="All Text-Style-2">All</span>
+        <span data-testid='all-posts-button' className="All Text-Style-2">All</span>
       </div>
       <div
         onClick={toggleView}
@@ -35,7 +35,7 @@ const PostToggle: React.FunctionComponent<PostToggleProps> = ({
         }}
         className="Rectangle"
       >
-        <span className="My-faves">My faves</span>
+        <span data-testid='favorite-posts-button' className="My-faves">My faves</span>
       </div>
     </div>
   );

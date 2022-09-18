@@ -1,9 +1,8 @@
-import days from 'dayjs';
+import days from "dayjs";
 
+import plugin from "dayjs/plugin/relativeTime";
 
-import * as relativeTime from 'dayjs/plugin/relativeTime';
-
-days.extend(relativeTime as any);
-
+// @ts-ignore
+days?.extend(plugin as any);
 
 export const timeAgo = (date: string) => days().to(days(date));
