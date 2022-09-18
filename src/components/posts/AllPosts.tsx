@@ -11,15 +11,47 @@ const AllPosts: React.FunctionComponent<AllPostsProps> = () => {
   const [params, setParams] = useState({ page: 0, query: "reactjs" });
   const [posts, setPosts] = useState<Hit[]>();
   const { data } = useGetPosts(params);
-  const notNullable = ['author', 'story_title', 'story_url', 'created_at']
+  const notNullable = ["author", "story_title", "story_url", "created_at"];
 
   useEffect(() => {
-    if(posts?.length) {
-      
-      setPosts([...posts, ...data?.hits as Hit[]])
+    const newHits: Hit[] = [];
+    if (posts?.length) {
+
+      data?.hits.forEach((hit) => {
+        let hasNull = false;
+        for (let i = 0; i < notNullable.length; i++) {
+          const key = notNullable[i];
+          if (
+            hit[key as keyof typeof hit] === undefined ||
+            hit[key as keyof typeof hit] === null
+          ) {
+            hasNull = true;
+            return;
+          }
+        }
+        if (!hasNull) newHits.push(hit);
+      });
+
+      setPosts([...posts, ...(newHits as Hit[])]);
       return;
     }
-    setPosts(data?.hits)
+
+    data?.hits.forEach((hit) => {
+      let hasNull = false;
+      for (let i = 0; i < notNullable.length; i++) {
+        const key = notNullable[i];
+        if (
+          hit[key as keyof typeof hit] === undefined ||
+          hit[key as keyof typeof hit] === null
+        ) {
+          hasNull = true;
+          return;
+        }
+      }
+      if (!hasNull) newHits.push(hit);
+    });
+
+    setPosts(newHits);
   }, [data?.hits]);
 
   return (
