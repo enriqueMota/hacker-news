@@ -193,6 +193,14 @@ img.HACKER-NEWS {
     background-color: #fff;
 }
 
+.Post > * {
+    transition: opacity ease .5s;
+}
+
+.Post:hover > * {
+    opacity: 0.5;
+}
+
 .Like-Duo{
     display: flex;
     justify-content: center;

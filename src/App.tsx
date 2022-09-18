@@ -4,6 +4,7 @@ import Header from "./components/layout/Header";
 import "./styles/index.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import PostToggle from "./components/layout/PostToggle";
+import FavPosts from "./components/posts/FavPosts";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -49,7 +50,7 @@ const App: React.FC = () => {
         <PostToggle {...{ showAll, toggleView }} />
         <div className="container">
           {showAll && <AllPosts />}
-          {!showAll && <>my faves</>}
+          {!showAll && <FavPosts />}
         </div>
       </div>
     </QueryClientProvider>
