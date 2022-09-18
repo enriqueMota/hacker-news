@@ -2,6 +2,10 @@ import React from "react";
 
 interface HeaderProps {}
 
+/**
+ * Container for the header of the web page.
+ * @returns The header of the web page
+ */
 const Header: React.FunctionComponent<HeaderProps> = () => {
   return (
     <div className="Rectangle-2-Copy">

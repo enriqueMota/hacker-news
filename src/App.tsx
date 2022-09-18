@@ -6,6 +6,9 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import PostToggle from "./components/layout/PostToggle";
 import FavPosts from "./components/posts/FavPosts";
 
+/**
+ * React Query client, configured for this app
+ */
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -25,6 +28,8 @@ const App: React.FC = () => {
   const [showAll, setShowAll] = useState(true);
 
   useEffect(() => {
+    // When the component mounts, check if there's already a list and
+    // a filter on the localStorage
     if (
       window?.localStorage.hasOwnProperty("liked_posts") &&
       window?.localStorage.hasOwnProperty("selected_filter")

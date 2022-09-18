@@ -9,6 +9,11 @@ interface DropdownProps {
   >;
 }
 
+/**
+ * Dropdown component
+ * @param {Function} setParams Changes the params state
+ * @returns JSX element
+ */
 const Dropdown: React.FunctionComponent<DropdownProps> = ({ setParams }) => {
   const [open, setOpen] = useState(false);
   const [filter, setFilter] = useState('reactjs');
@@ -17,6 +22,10 @@ const Dropdown: React.FunctionComponent<DropdownProps> = ({ setParams }) => {
     setOpen(!open);
   };
 
+  /**
+   * Handles the click event on the dropdown options and manages localStorage
+   * @param technology technology to be queried on the API
+   */
   const handleClick = (technology: string) => {
     setParams((prevParams) => {
       return {

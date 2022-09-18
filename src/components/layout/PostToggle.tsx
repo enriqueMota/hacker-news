@@ -5,6 +5,12 @@ interface PostToggleProps {
   showAll: boolean;
 }
 
+/**
+ * Toggle switch component
+ * @param {Function} toggleView Switches between all posts and favorite posts
+ * @param {Boolean} showAll Truthy if the showAll view is visible
+ * @returns The toggle buttons
+ */
 const PostToggle: React.FunctionComponent<PostToggleProps> = ({
   toggleView,
   showAll,
